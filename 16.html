@@ -15,16 +15,18 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 30px 15px;
 }
 
 /* Quiz Card */
 .quiz-container {
     background: #ffffff;
-    width: 380px;
+    width: 100%;
+    max-width: 700px;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -32,8 +34,19 @@ body {
 }
 
 /* Question */
-#questionText {
-    margin-bottom: 20px;
+#questionCount {
+    margin-bottom: 18px;
+    color: #667eea;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.question-box {
+    margin-bottom: 22px;
+}
+
+.question-text {
+    margin-bottom: 12px;
     font-size: 20px;
     color: #333;
 }
@@ -89,7 +102,7 @@ body {
     margin-top: 25px;
     font-size: 22px;
     font-weight: bold;
-    color: #fff;
+    color: #ffffff;
 }
 
 /* Animation */
@@ -110,32 +123,51 @@ body {
 
 <div class="quiz-container">
 
-    <!-- Question -->
-    <h2 id="questionText"></h2>
+    <h2>Simple Quiz</h2>
+    <p id="questionCount">Total Questions: 5</p>
 
-    <!-- Options -->
-    <label class="option">
-        <input type="radio" name="answerOption" value="0">
-        <span id="option1Text"></span>
-    </label>
+    <div class="question-box">
+        <p class="question-text">1. HTML stands for?</p>
+        <label class="option"><input type="radio" name="q1" value="0"> Hyper Text Markup Language</label>
+        <label class="option"><input type="radio" name="q1" value="1"> High Text Machine</label>
+        <label class="option"><input type="radio" name="q1" value="2"> Tool Language</label>
+        <label class="option"><input type="radio" name="q1" value="3"> None</label>
+    </div>
 
-    <label class="option">
-        <input type="radio" name="answerOption" value="1">
-        <span id="option2Text"></span>
-    </label>
+    <div class="question-box">
+        <p class="question-text">2. CSS is used for?</p>
+        <label class="option"><input type="radio" name="q2" value="0"> Structure</label>
+        <label class="option"><input type="radio" name="q2" value="1"> Styling</label>
+        <label class="option"><input type="radio" name="q2" value="2"> Database</label>
+        <label class="option"><input type="radio" name="q2" value="3"> Logic</label>
+    </div>
 
-    <label class="option">
-        <input type="radio" name="answerOption" value="2">
-        <span id="option3Text"></span>
-    </label>
+    <div class="question-box">
+        <p class="question-text">3. JavaScript is?</p>
+        <label class="option"><input type="radio" name="q3" value="0"> Programming Language</label>
+        <label class="option"><input type="radio" name="q3" value="1"> Database</label>
+        <label class="option"><input type="radio" name="q3" value="2"> OS</label>
+        <label class="option"><input type="radio" name="q3" value="3"> Browser</label>
+    </div>
 
-    <label class="option">
-        <input type="radio" name="answerOption" value="3">
-        <span id="option4Text"></span>
-    </label>
+    <div class="question-box">
+        <p class="question-text">4. Which tag is used to create a hyperlink in HTML?</p>
+        <label class="option"><input type="radio" name="q4" value="0"> &lt;a&gt;</label>
+        <label class="option"><input type="radio" name="q4" value="1"> &lt;link&gt;</label>
+        <label class="option"><input type="radio" name="q4" value="2"> &lt;href&gt;</label>
+        <label class="option"><input type="radio" name="q4" value="3"> &lt;url&gt;</label>
+    </div>
+
+    <div class="question-box">
+        <p class="question-text">5. Which CSS property changes text color?</p>
+        <label class="option"><input type="radio" name="q5" value="0"> font-style</label>
+        <label class="option"><input type="radio" name="q5" value="1"> color</label>
+        <label class="option"><input type="radio" name="q5" value="2"> text-align</label>
+        <label class="option"><input type="radio" name="q5" value="3"> background</label>
+    </div>
 
     <!-- Button -->
-    <button class="btn" onclick="goToNextQuestion()">Next</button>
+    <button class="btn" onclick="submitQuiz()">Submit Quiz</button>
 
 </div>
 
@@ -143,70 +175,18 @@ body {
 <h3 id="finalResult"></h3>
 
 <script>
+function submitQuiz() {
+    let score = 0;
+    
+    if (document.querySelector("input[name='q1']:checked")?.value == "0") score++;
+    if (document.querySelector("input[name='q2']:checked")?.value == "1") score++;
+    if (document.querySelector("input[name='q3']:checked")?.value == "0") score++;
+    if (document.querySelector("input[name='q4']:checked")?.value == "0") score++;
+    if (document.querySelector("input[name='q5']:checked")?.value == "1") score++;
 
-let questions = [
-    {
-        question: "HTML stands for?",
-        options: ["Hyper Text Markup Language", "High Text Machine", "Tool Language", "None"],
-        correctAnswer: 0
-    },
-    {
-        question: "CSS is used for?",
-        options: ["Structure", "Styling", "Database", "Logic"],
-        correctAnswer: 1
-    },
-    {
-        question: "JavaScript is?",
-        options: ["Programming Language", "Database", "OS", "Browser"],
-        correctAnswer: 0
-    }
-];
-
-let currentQuestionIndex = 0;
-let score = 0;
-
-// Load question
-function loadQuestion() {
-    document.getElementById("questionText").innerText = questions[currentQuestionIndex].question;
-
-    document.getElementById("option1Text").innerText = questions[currentQuestionIndex].options[0];
-    document.getElementById("option2Text").innerText = questions[currentQuestionIndex].options[1];
-    document.getElementById("option3Text").innerText = questions[currentQuestionIndex].options[2];
-    document.getElementById("option4Text").innerText = questions[currentQuestionIndex].options[3];
+    document.getElementById("finalResult").innerText =
+        "Your Score: " + score + " / 5";
 }
-
-// Next button
-function goToNextQuestion() {
-    let options = document.getElementsByName("answerOption");
-    let selected = -1;
-
-    for (let i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-            selected = i;
-        }
-    }
-
-    if (selected === questions[currentQuestionIndex].correctAnswer) {
-        score++;
-    }
-
-    // Clear selection
-    for (let i = 0; i < options.length; i++) {
-        options[i].checked = false;
-    }
-
-    currentQuestionIndex++;
-
-    if (currentQuestionIndex < questions.length) {
-        loadQuestion();
-    } else {
-        document.querySelector(".quiz-container").innerHTML = "<h2>Quiz Finished</h2>";
-        document.getElementById("finalResult").innerText = "Your Score: " + score;
-    }
-}
-
-// Start quiz
-loadQuestion();
 
 </script>
 
