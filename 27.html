@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Dashboard</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .chart-box {
+            width: 320px;
+            height: 280px;
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chart-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+
+        .chart-box h4 {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        canvas {
+            max-width: 100%;
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>🌤 Weekly Weather Dashboard</h2>
+
+<div class="container">
+
+    <!-- Line Chart -->
+    <div class="chart-box">
+        <h4>Temperature (°C)</h4>
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <!-- Bar Chart -->
+    <div class="chart-box">
+        <h4>Humidity (%)</h4>
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="chart-box">
+        <h4>Weather Distribution</h4>
+        <canvas id="pieChart"></canvas>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    const temperature = [30, 32, 31, 29, 28, 27, 30];
+    const humidity = [60, 65, 70, 55, 50, 45, 60];
+
+    const weatherTypes = ["Sunny", "Rainy", "Cloudy"];
+    const weatherCount = [3, 2, 2];
+
+    // LINE CHART
+    new Chart(document.getElementById("lineChart"), {
+        type: 'line',
+        data: {
+            labels: days,
+            datasets: [{
+                label: "Temperature",
+                data: temperature,
+                borderColor: "#ff5733",
+                backgroundColor: "rgba(255, 87, 51, 0.2)",
+                fill: true,
+                tension: 0.4
+            }]
+        }
+    });
+
+    // BAR CHART
+    new Chart(document.getElementById("barChart"), {
+        type: 'bar',
+        data: {
+            labels: days,
+            datasets: [{
+                label: "Humidity",
+                data: humidity,
+                backgroundColor: "#28a745",
+                borderRadius: 8
+            }]
+        }
+    });
+
+    // PIE CHART
+    new Chart(document.getElementById("pieChart"), {
+        type: 'pie',
+        data: {
+            labels: weatherTypes,
+            datasets: [{
+                data: weatherCount,
+                backgroundColor: ["#ffc107", "#dc3545", "#6c757d"]
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>

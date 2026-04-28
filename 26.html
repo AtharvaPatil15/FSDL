@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Distribution</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background */
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card */
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Title */
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Chart */
+.chart-box {
+    width: 100%;
+    height: 300px;
+}
+
+/* Legend style improvement */
+.legend-box {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.legend-item {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.color-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 3px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>📊 Attendance Distribution</h2>
+
+    <div class="chart-box">
+        <canvas id="piechart"></canvas>
+    </div>
+
+    <!-- Custom Legend -->
+    <div class="legend-box" id="legend"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const data = {
+    labels: ["Present", "Absent", "Leave"],
+    values: [70, 20, 10]
+};
+
+const colors = ["#667eea", "#ff7eb3", "#42e695"];
+
+const ctx = document.getElementById('piechart');
+
+new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: data.labels,
+        datasets: [{
+            data: data.values,
+            backgroundColor: colors
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+// Custom Legend
+let legend = document.getElementById("legend");
+
+data.labels.forEach((label, i) => {
+    let div = document.createElement("div");
+    div.className = "legend-item";
+
+    div.innerHTML = `
+        <span class="color-box" style="background:${colors[i]}"></span>
+        ${label}
+    `;
+
+    legend.appendChild(div);
+});
+</script>
+
+</body>
+</html>

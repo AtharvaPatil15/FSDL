@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Interactive Blog</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f7fb;
+}
+
+/* HEADER */
+.header {
+    background: #2c3e50;
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header h2 {
+    font-weight: 500;
+}
+
+.header button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    background: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.header button:hover {
+    background: #2980b9;
+}
+
+/* MAIN FULL HEIGHT */
+.main {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+    transition: 0.3s;
+}
+
+.sidebar h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.sidebar p {
+    margin: 10px 0;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.sidebar p:hover {
+    background: #eef2ff;
+    transform: translateX(5px);
+}
+
+/* CONTENT */
+.content {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+/* POSTS */
+.post {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.post:hover {
+    transform: translateY(-3px);
+}
+
+.post h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.post p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* LIKE BUTTON */
+.like-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 20px;
+    background: #27ae60;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.like-btn:hover {
+    transform: scale(1.05);
+    background: #219150;
+}
+
+.like-count {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #27ae60;
+}
+
+/* FOOTER */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h2>📝 My Blog</h2>
+    <button onclick="toggleSidebar()">☰ Menu</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+        <h3>Categories</h3>
+        <p>📱 Technology</p>
+        <p>🎓 Education</p>
+        <p>✈️ Travel</p>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- POST 1 -->
+        <div class="post">
+            <h3>Modern Web Development</h3>
+            <p>Latest trends like React, performance optimization and UI/UX design are shaping the future of web apps.</p>
+
+            <button class="like-btn" onclick="likePost(0)">👍 Like</button>
+            <p class="like-count" id="like0">0 Likes</p>
+        </div>
+
+        <!-- POST 2 -->
+        <div class="post">
+            <h3>Why Learn JavaScript?</h3>
+            <p>JavaScript is essential for building interactive websites and is widely used in frontend and backend.</p>
+
+            <button class="like-btn" onclick="likePost(1)">👍 Like</button>
+            <p class="like-count" id="like1">0 Likes</p>
+        </div>
+
+        <!-- POST 3 -->
+        <div class="post">
+            <h3>UI/UX Design Basics</h3>
+            <p>Good design improves user satisfaction and makes applications easy and enjoyable to use.</p>
+
+            <button class="like-btn" onclick="likePost(2)">👍 Like</button>
+            <p class="like-count" id="like2">0 Likes</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 My Blog</p>
+</div>
+
+<script>
+let likes = [0, 0, 0];
+
+function toggleSidebar() {
+    let sb = document.getElementById("sidebar");
+
+    if (sb.style.display === "none") {
+        sb.style.display = "block";
+    } else {
+        sb.style.display = "none";
+    }
+}
+
+function likePost(index) {
+    likes[index]++;
+    document.getElementById("like" + index).innerText = likes[index] + " Likes";
+}
+</script>
+
+</body>
+</html>

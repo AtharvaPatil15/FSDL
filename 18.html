@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes App</title>
+
+    <style>
+        /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Box */
+.box {
+    width: 340px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* Heading */
+.box h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Textarea */
+textarea {
+    width: 100%;
+    height: 80px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    resize: none;
+    outline: none;
+    transition: 0.3s;
+}
+
+textarea:focus {
+    border-color: #667eea;
+}
+
+/* Add Button */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Notes Container */
+#notesContainer {
+    margin-top: 15px;
+}
+
+/* Each Note */
+.note {
+    background: #f5f7ff;
+    padding: 10px 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Note text */
+.note span {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Delete Button */
+.delete {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.delete:hover {
+    background: #cc0000;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Notes App</h2>
+
+    <textarea id="noteInput" placeholder="Write note..."></textarea><br>
+    <button onclick="addNote()">Add Note</button>
+
+    <div id="notesContainer"></div>
+</div>
+
+<script>
+
+// Load notes from localStorage on page load
+window.onload = function() {
+    displayNotes();
+};
+
+// Add Note
+function addNote() {
+    let input = document.getElementById("noteInput");
+    let note = input.value;
+
+    if (note === "") {
+        alert("Write something!");
+        return;
+    }
+
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    notes.push(note);
+
+    localStorage.setItem("notes", JSON.stringify(notes));
+
+    input.value = "";
+
+    displayNotes();
+}
+
+// Display Notes
+function displayNotes() {
+    let container = document.getElementById("notesContainer");
+    container.innerHTML = "";
+
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    notes.forEach((n, index) => {
+
+        let div = document.createElement("div");
+        div.className = "note";
+
+        div.innerHTML = n + 
+        `<button class="delete" onclick="deleteNote(${index})">X</button>`;
+
+        container.appendChild(div);
+    });
+}
+
+// Delete Note
+function deleteNote(index) {
+    let notes = JSON.parse(localStorage.getItem("notes"));
+
+    notes.splice(index, 1);
+
+    localStorage.setItem("notes", JSON.stringify(notes));
+
+    displayNotes();
+}
+
+</script>
+
+</body>
+</html>
+
+
+<!-- 🧠 Where to see localStorage?
+
+👉 Browser me milta hai (Chrome use karo)
+
+Steps:
+Right click on your page
+Click Inspect
+Go to Application tab
+Left side me click Local Storage
+Apni site select karo
+
+👉 Waha tumhe key = "notes" dikhega
+👉 Uske saamne pura data stored hoga -->

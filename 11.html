@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            text-align: center;
+            padding: 30px;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .cart {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* Product Card */
+        .product {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            width: 220px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        /* Quantity controls */
+        .qty-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .qty-btn:hover {
+            background: #4b5bdc;
+        }
+
+        .qty {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Product total */
+        .item-total {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        /* Grand total */
+        .total-box {
+            margin-top: 30px;
+            background: white;
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .highlight {
+            color: #667eea;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h2>🛒 Shopping Cart System</h2>
+
+<div class="cart">
+
+    <!-- Product 1 -->
+    <div class="product">
+        <h3>Product A</h3>
+        <p class="price">₹100</p>
+
+        <div class="qty-box">
+            <button class="qty-btn" onclick="changeQty(0, -1)">−</button>
+            <span id="qty0" class="qty">0</span>
+            <button class="qty-btn" onclick="changeQty(0, 1)">+</button>
+        </div>
+
+        <p class="item-total">Total: ₹<span id="total0">0</span></p>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product">
+        <h3>Product B</h3>
+        <p class="price">₹200</p>
+
+        <div class="qty-box">
+            <button class="qty-btn" onclick="changeQty(1, -1)">−</button>
+            <span id="qty1" class="qty">0</span>
+            <button class="qty-btn" onclick="changeQty(1, 1)">+</button>
+        </div>
+
+        <p class="item-total">Total: ₹<span id="total1">0</span></p>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product">
+        <h3>Product C</h3>
+        <p class="price">₹150</p>
+
+        <div class="qty-box">
+            <button class="qty-btn" onclick="changeQty(2, -1)">−</button>
+            <span id="qty2" class="qty">0</span>
+            <button class="qty-btn" onclick="changeQty(2, 1)">+</button>
+        </div>
+
+        <p class="item-total">Total: ₹<span id="total2">0</span></p>
+    </div>
+
+</div>
+
+<div class="total-box">
+    Grand Total: ₹<span id="grandTotal" class="highlight">0</span>
+</div>
+
+<script>
+let prices = [100, 200, 150];
+let qty = [0, 0, 0];
+
+function update() {
+    let grand = 0;
+
+    for (let i = 0; i < 3; i++) {
+        let total = prices[i] * qty[i];
+
+        document.getElementById("qty" + i).innerText = qty[i];
+        document.getElementById("total" + i).innerText = total;
+
+        grand += total;
+    }
+
+    document.getElementById("grandTotal").innerText = grand;
+}
+
+function changeQty(index, value) {
+    qty[index] += value;
+
+    if (qty[index] < 0) {
+        qty[index] = 0;
+    }
+
+    update();
+}
+</script>
+
+</body>
+</html>

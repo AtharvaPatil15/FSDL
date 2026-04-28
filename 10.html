@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Accordion</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .faq-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* Card */
+        .faq {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Question */
+        .question {
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question:hover {
+            background: #f1f1f1;
+        }
+
+        /* Icon */
+        .icon {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        /* Answer */
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 15px;
+            background: #fafafa;
+            transition: max-height 0.4s ease, padding 0.3s;
+        }
+
+        .answer p {
+            margin: 10px 0;
+        }
+
+        /* Active state */
+        .faq.active .answer {
+            max-height: 100px;
+            padding: 10px 15px;
+        }
+
+        .faq.active .icon {
+            transform: rotate(180deg);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h2>❓ FAQ Accordion</h2>
+
+<div class="faq-container">
+
+    <!-- FAQ 1 -->
+    <div class="faq">
+        <div class="question" onclick="toggleFAQ(this)">
+            What is HTML?
+            <span class="icon">▼</span>
+        </div>
+        <div class="answer">
+            <p>HTML is used to create the structure of web pages.</p>
+        </div>
+    </div>
+
+    <!-- FAQ 2 -->
+    <div class="faq">
+        <div class="question" onclick="toggleFAQ(this)">
+            What is CSS?
+            <span class="icon">▼</span>
+        </div>
+        <div class="answer">
+            <p>CSS is used to style and design web pages.</p>
+        </div>
+    </div>
+
+    <!-- FAQ 3 -->
+    <div class="faq">
+        <div class="question" onclick="toggleFAQ(this)">
+            What is JavaScript?
+            <span class="icon">▼</span>
+        </div>
+        <div class="answer">
+            <p>JavaScript is used to add interactivity and logic.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+function toggleFAQ(q) {
+
+    let faq = q.parentElement;
+
+    // Close all other FAQs (optional but better UX)
+    let allFAQs = document.querySelectorAll(".faq");
+    allFAQs.forEach(item => {
+        if (item !== faq) {
+            item.classList.remove("active");
+        }
+    });
+
+    // Toggle current one
+    faq.classList.toggle("active");
+}
+
+</script>
+
+</body>
+</html>

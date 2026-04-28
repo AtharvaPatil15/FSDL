@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stopwatch</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            margin-top: 80px;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 60px;
+            color: #fff;
+            background: rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        button:nth-child(2) {
+            background: #28a745;
+            color: white;
+        }
+
+        button:nth-child(3) {
+            background: #dc3545;
+            color: white;
+        }
+
+        button:nth-child(4) {
+            background: #ffc107;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1 id="time">0 : 0 : 0</h1>
+
+<br>
+
+<button onclick="start()">Start</button>
+<button onclick="stop()">Stop</button>
+<button onclick="reset()">Reset</button>
+
+<script>
+let sec = 0;
+let min = 0;
+let hr = 0;
+let timer;
+
+// Start
+function start() {
+    timer = setInterval(updateTime, 1000);
+}
+
+// Stop
+function stop() {
+    clearInterval(timer);
+}
+
+// Reset
+function reset() {
+    clearInterval(timer);
+    sec = 0;
+    min = 0;
+    hr = 0;
+    document.getElementById("time").innerText = "0 : 0 : 0";
+}
+
+// Update Time
+function updateTime() {
+    sec++;
+
+    if (sec == 60) {
+        sec = 0;
+        min++;
+    }
+
+    if (min == 60) {
+        min = 0;
+        hr++;
+    }
+
+    document.getElementById("time").innerText = hr + " : " + min + " : " + sec;
+}
+</script>
+
+</body>
+</html>

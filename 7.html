@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navbar Demo</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7ff;
+        }
+
+        /* NAVBAR */
+        .nav {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* MENU LINKS */
+        .menu a {
+            color: white;
+            margin: 0 12px;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* DROPDOWN */
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .drop-content {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: white;
+            min-width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .drop-content a {
+            color: black;
+            display: block;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .drop-content a:hover {
+            background: #f0f0f0;
+        }
+
+        .show-dropdown {
+            display: block;
+        }
+
+        /* MENU BUTTON */
+        .menu-btn {
+            display: none;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        /* ANIMATION */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                width: 100%;
+                background: #4facfe;
+                position: absolute;
+                top: 55px;
+                left: 0;
+                flex-direction: column;
+                padding: 10px 0;
+            }
+
+            .menu.show {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .menu a {
+                display: block;
+                margin: 8px 0;
+                text-align: center;
+            }
+
+            .dropdown {
+                text-align: center;
+            }
+
+            .drop-content {
+                position: static;
+                box-shadow: none;
+                background: #ffffff;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="nav">
+
+    <!-- Menu button -->
+    <span class="menu-btn" onclick="toggleMenu()">☰ Menu</span>
+
+    <!-- Menu -->
+    <div class="menu" id="menu">
+        <a onclick="showPage('Home')">Home</a>
+        <a onclick="showPage('About')">About</a>
+
+        <!-- Dropdown -->
+        <div class="dropdown">
+            <a onclick="toggleDropdown()">Services ▼</a>
+            <div class="drop-content" id="dropdown">
+                <a onclick="showPage('Web Development')">Web Development</a>
+                <a onclick="showPage('App Development')">App Development</a>
+            </div>
+        </div>
+
+        <a onclick="showPage('Contact')">Contact</a>
+    </div>
+
+</div>
+
+<!-- Content -->
+<div class="content" id="content">
+    <h2>Welcome</h2>
+    <p>Click menu items to see content.</p>
+</div>
+
+<script>
+
+// Toggle mobile menu
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+}
+
+// Toggle dropdown
+function toggleDropdown() {
+    document.getElementById("dropdown").classList.toggle("show-dropdown");
+}
+
+// Change content
+function showPage(page) {
+    document.getElementById("content").innerHTML =
+        "<h2>" + page + "</h2><p>This is " + page + " page content.</p>";
+}
+
+</script>
+
+</body>
+</html>

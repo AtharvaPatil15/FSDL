@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Glossary</title>
+
+    <style>
+        /* Page background */
+        body {
+            font-family: Arial;
+            background: #f2f6ff;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* Title */
+        h2 {
+            color: #333;
+        }
+
+        /* Search box */
+        #search {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        /* Table styling */
+        table {
+            margin: auto;
+            margin-top: 20px;
+            width: 60%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Table header */
+        th {
+            background: #4facfe;
+            color: white;
+            padding: 12px;
+        }
+
+        /* Table cells */
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Hover effect */
+        tr:hover {
+            background: #f1f1f1;
+        }
+
+        /* Last row border remove */
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>HTML Tags Glossary</h2>
+
+<!-- Search bar -->
+<input type="text" id="search" placeholder="Search tags..." onkeyup="filterTable()">
+
+<!-- Table -->
+<table id="myTable">
+    <tr>
+        <th>Tag</th>
+        <th>Description</th>
+    </tr>
+
+    <tr>
+        <td>&lt;b&gt;</td>
+        <td>Bold</td>
+    </tr>
+
+    <tr>
+        <td>&lt;i&gt;</td>
+        <td>Italic</td>
+    </tr>
+
+    <tr>
+        <td>&lt;u&gt;</td>
+        <td>Underline</td>
+    </tr>
+
+    <tr>
+        <td>&lt;p&gt;</td>
+        <td>Paragraph</td>
+    </tr>
+</table>
+
+<script>
+function filterTable() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let rows = document.getElementById("myTable").getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+        let text = rows[i].innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Calculator</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            width: 280px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Inputs */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            background: #f1f3f6;
+            outline: none;
+            font-size: 16px;
+        }
+
+        input:focus {
+            background: #e6ebff;
+        }
+
+        /* Buttons grid */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #4b5bdc;
+            transform: scale(1.05);
+        }
+
+        /* Result box */
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f4f7ff;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #result {
+            color: #667eea;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+    <h2>🧮 Calculator</h2>
+
+    <input type="number" id="num1" placeholder="Enter number 1">
+    <input type="number" id="num2" placeholder="Enter number 2">
+
+    <div class="buttons">
+        <button onclick="calculate('+')"> Add</button>
+        <button onclick="calculate('-')"> Subtract</button>
+        <button onclick="calculate('*')"> Multiply</button>
+        <button onclick="calculate('/')"> Divide</button>
+    </div>
+
+    <div class="result">
+        Result: <span id="result">0</span>
+    </div>
+
+</div>
+
+<script>
+function calculate(op) {
+    let n1 = Number(document.getElementById("num1").value);
+    let n2 = Number(document.getElementById("num2").value);
+    let res = 0;
+
+    if (isNaN(n1) || isNaN(n2)) {
+        alert("Please enter valid numbers");
+        return;
+    }
+
+    if (op === '+') res = n1 + n2;
+    else if (op === '-') res = n1 - n2;
+    else if (op === '*') res = n1 * n2;
+    else if (op === '/') {
+        if (n2 === 0) {
+            alert("Cannot divide by zero");
+            return;
+        }
+        res = n1 / n2;
+    }
+
+    document.getElementById("result").innerText = res;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!-- Build a Product Gallery that dynamically displays products from a JSON dataset using cards
+and includes a “Buy Now” interaction. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Gallery</title>
+
+    <style>
+        /* Page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7ff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Container */
+        #products {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Product card */
+        .card {
+            background: white;
+            width: 180px;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+        }
+
+        /* Hover effect */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Product name */
+        .card h3 {
+            margin: 10px 0;
+            color: #222;
+        }
+
+        /* Price */
+        .card p {
+            color: #2e7d32;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Button */
+        button {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            border: none;
+            padding: 8px 12px;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Products</h2>
+
+<div id="products"></div>
+
+<script>
+// JSON data
+let data = [
+    { name: "Shoes", price: 1000 },
+    { name: "Watch", price: 2000 },
+    { name: "Bag", price: 1500 }
+];
+
+// Function to display products
+function showProducts() {
+
+    let container = document.getElementById("products");
+
+    for (let i = 0; i < data.length; i++) {
+
+        // Create card
+        let card = document.createElement("div");
+        card.className = "card";
+
+        // Product name
+        let name = document.createElement("h3");
+        name.innerText = data[i].name;
+
+        // Price
+        let price = document.createElement("p");
+        price.innerText = "₹" + data[i].price;
+
+        // Button
+        let btn = document.createElement("button");
+        btn.innerText = "Buy Now";
+
+        // Interaction
+        btn.onclick = function () {
+            alert("You bought " + name.innerText);
+        };
+
+        // Add elements
+        card.appendChild(name);
+        card.appendChild(price);
+        card.appendChild(btn);
+
+        container.appendChild(card);
+    }
+}
+
+// Call function
+showProducts();
+</script>
+
+</body>
+</html>

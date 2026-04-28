@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skill Bar</title>
+
+    <style>
+        /* Body */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: white;
+        }
+
+        /* Input */
+        input {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        /* Button */
+        .add-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #333;
+            color: white;
+        }
+
+        /* Skill box */
+        .skill-box {
+            width: 320px;
+            margin: 15px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            text-align: left;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Header */
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Remove button */
+        .remove-btn {
+            background: #ff4d4d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .remove-btn:hover {
+            background: #cc0000;
+        }
+
+        /* Bar */
+        .bar-bg {
+            width: 100%;
+            height: 22px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            line-height: 22px;
+            transition: width 0.5s ease;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h2>Skill Bar</h2>
+
+<!-- Inputs -->
+<input type="text" id="skillName" placeholder="Enter Skill">
+<input type="number" id="skillPercent" placeholder="%" max="100">
+
+<button class="add-btn" onclick="addSkill()">Add Skill</button>
+
+<!-- Output -->
+<div id="output"></div>
+
+<script>
+
+function addSkill() {
+
+    let name = document.getElementById("skillName").value;
+    let percent = document.getElementById("skillPercent").value;
+
+    if (name === "" || percent === "") {
+        alert("Enter both values");
+        return;
+    }
+
+    if (percent > 100 || percent < 0) {
+        alert("Enter percentage between 0-100");
+        return;
+    }
+
+    let box = document.createElement("div");
+    box.className = "skill-box";
+
+    // Header
+    let header = document.createElement("div");
+    header.className = "skill-header";
+
+    let title = document.createElement("p");
+    title.innerText = name;
+
+    let removeBtn = document.createElement("button");
+    removeBtn.innerText = "X";
+    removeBtn.className = "remove-btn";
+
+    // Remove function
+    removeBtn.onclick = function () {
+        box.remove();
+    };
+
+    header.appendChild(title);
+    header.appendChild(removeBtn);
+
+    // Bar
+    let bg = document.createElement("div");
+    bg.className = "bar-bg";
+
+    let fill = document.createElement("div");
+    fill.className = "bar-fill";
+
+    // Start from 0 for animation
+    fill.style.width = "0%";
+    fill.innerText = percent + "%";
+
+    bg.appendChild(fill);
+
+    box.appendChild(header);
+    box.appendChild(bg);
+
+    document.getElementById("output").appendChild(box);
+
+    // Animate after adding
+    setTimeout(() => {
+        fill.style.width = percent + "%";
+    }, 100);
+
+    // Clear inputs
+    document.getElementById("skillName").value = "";
+    document.getElementById("skillPercent").value = "";
+}
+
+</script>
+
+</body>
+</html>

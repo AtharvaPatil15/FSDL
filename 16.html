@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz App</title>
+
+    <style>
+      /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Quiz Card */
+.quiz-container {
+    background: #ffffff;
+    width: 380px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Question */
+#questionText {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Options */
+.option {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* Hover */
+.option:hover {
+    background: #f5f7ff;
+    border-color: #667eea;
+}
+
+/* Radio */
+.option input {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Button */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Button hover */
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Result */
+#finalResult {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+    <!-- Question -->
+    <h2 id="questionText"></h2>
+
+    <!-- Options -->
+    <label class="option">
+        <input type="radio" name="answerOption" value="0">
+        <span id="option1Text"></span>
+    </label>
+
+    <label class="option">
+        <input type="radio" name="answerOption" value="1">
+        <span id="option2Text"></span>
+    </label>
+
+    <label class="option">
+        <input type="radio" name="answerOption" value="2">
+        <span id="option3Text"></span>
+    </label>
+
+    <label class="option">
+        <input type="radio" name="answerOption" value="3">
+        <span id="option4Text"></span>
+    </label>
+
+    <!-- Button -->
+    <button class="btn" onclick="goToNextQuestion()">Next</button>
+
+</div>
+
+<!-- Result -->
+<h3 id="finalResult"></h3>
+
+<script>
+
+let questions = [
+    {
+        question: "HTML stands for?",
+        options: ["Hyper Text Markup Language", "High Text Machine", "Tool Language", "None"],
+        correctAnswer: 0
+    },
+    {
+        question: "CSS is used for?",
+        options: ["Structure", "Styling", "Database", "Logic"],
+        correctAnswer: 1
+    },
+    {
+        question: "JavaScript is?",
+        options: ["Programming Language", "Database", "OS", "Browser"],
+        correctAnswer: 0
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+// Load question
+function loadQuestion() {
+    document.getElementById("questionText").innerText = questions[currentQuestionIndex].question;
+
+    document.getElementById("option1Text").innerText = questions[currentQuestionIndex].options[0];
+    document.getElementById("option2Text").innerText = questions[currentQuestionIndex].options[1];
+    document.getElementById("option3Text").innerText = questions[currentQuestionIndex].options[2];
+    document.getElementById("option4Text").innerText = questions[currentQuestionIndex].options[3];
+}
+
+// Next button
+function goToNextQuestion() {
+    let options = document.getElementsByName("answerOption");
+    let selected = -1;
+
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
+            selected = i;
+        }
+    }
+
+    if (selected === questions[currentQuestionIndex].correctAnswer) {
+        score++;
+    }
+
+    // Clear selection
+    for (let i = 0; i < options.length; i++) {
+        options[i].checked = false;
+    }
+
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+    } else {
+        document.querySelector(".quiz-container").innerHTML = "<h2>Quiz Finished</h2>";
+        document.getElementById("finalResult").innerText = "Your Score: " + score;
+    }
+}
+
+// Start quiz
+loadQuestion();
+
+</script>
+
+</body>
+</html>

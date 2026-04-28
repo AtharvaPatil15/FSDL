@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Filter</title>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: white;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 15px;
+            margin: 8px;
+            cursor: pointer;
+            border: none;
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #333;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .active {
+            background: #333;
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            padding: 10px;
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            width: 200px;
+            margin: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Image */
+        .card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        /* Content */
+        .card-content {
+            padding: 15px;
+        }
+
+        .card h4 {
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .card p {
+            color: #777;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h2>Product Filter</h2>
+
+<!-- Buttons -->
+<button class="btn active" onclick="filterProduct('all', this)">All</button>
+<button class="btn" onclick="filterProduct('electronics', this)">Electronics</button>
+<button class="btn" onclick="filterProduct('clothes', this)">Clothes</button>
+
+<!-- Cards -->
+<div class="container">
+
+    <div class="card electronics">
+        <img src="https://via.placeholder.com/200x140?text=Laptop" alt="Laptop">
+        <div class="card-content">
+            <h4>Laptop</h4>
+            <p>Category: Electronics</p>
+        </div>
+    </div>
+
+    <div class="card electronics">
+        <img src="https://via.placeholder.com/200x140?text=Mobile" alt="Mobile">
+        <div class="card-content">
+            <h4>Mobile</h4>
+            <p>Category: Electronics</p>
+        </div>
+    </div>
+
+    <div class="card clothes">
+        <img src="https://via.placeholder.com/200x140?text=Shirt" alt="Shirt">
+        <div class="card-content">
+            <h4>Shirt</h4>
+            <p>Category: Clothes</p>
+        </div>
+    </div>
+
+    <div class="card clothes">
+        <img src="https://via.placeholder.com/200x140?text=Jeans" alt="Jeans">
+        <div class="card-content">
+            <h4>Jeans</h4>
+            <p>Category: Clothes</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function filterProduct(category, btn) {
+
+    let items = document.getElementsByClassName("card");
+    let buttons = document.getElementsByClassName("btn");
+
+    // Remove active class
+    for (let b of buttons) {
+        b.classList.remove("active");
+    }
+
+    // Add active class to clicked button
+    btn.classList.add("active");
+
+    // Filter logic
+    for (let i = 0; i < items.length; i++) {
+
+        if (category === "all") {
+            items[i].style.display = "block";
+        } 
+        else if (items[i].classList.contains(category)) {
+            items[i].style.display = "block";
+        } 
+        else {
+            items[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>

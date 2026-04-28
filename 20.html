@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Registration Form</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.form-box {
+    width: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);} 
+    to {opacity: 1; transform: translateY(0);} 
+} */
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    width: 100%;
+    margin: 8px 0 15px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102,126,234,0.5);
+}
+
+.gender {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#msg {
+    color: green;
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+    font-weight: 600;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="form-box">
+
+    <h2>🎓 Student Registration</h2>
+
+    <label>Name:</label>
+    <input type="text" placeholder="Enter your name">
+
+    <label>Email:</label>
+    <input type="email" placeholder="Enter your email">
+
+    <label>Gender:</label>
+    <div class="gender">
+        <label><input type="radio" name="gender"> Male</label>
+        <label><input type="radio" name="gender"> Female</label>
+    </div>
+
+    <label>Course:</label>
+    <select>
+        <option>B.Tech</option>
+        <option>BCA</option>
+        <option>MCA</option>
+    </select>
+
+    <label>Address:</label>
+    <textarea rows="3" placeholder="Enter your address"></textarea>
+
+    <button onclick="showMsg()">Register</button>
+
+    <p id="msg">✅ Form Submitted Successfully!</p>
+
+</div>
+
+<script>
+function showMsg() {
+    document.getElementById("msg").style.display = "block";
+}
+</script>
+
+</body>
+</html>

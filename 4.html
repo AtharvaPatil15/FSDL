@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Preview</title>
+
+    <style>
+        /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Heading */
+h2 {
+    color: white;
+    margin-top: 30px;
+}
+
+/* Input container */
+.input-box {
+    margin-top: 20px;
+}
+
+/* Inputs */
+input {
+    width: 260px;
+    padding: 12px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+input:focus {
+    transform: scale(1.05);
+}
+
+/* Profile Card */
+.card {
+    width: 280px;
+    margin-top: 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Avatar */
+.avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    border-radius: 50%;
+    margin: auto;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Name */
+#pname {
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+/* Email */
+#pemail {
+    color: gray;
+    font-size: 14px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<h2>Real-Time Profile Preview</h2>
+
+<!-- Inputs -->
+<input type="text" id="name" placeholder="Enter Name" onkeyup="updateProfile()"><br>
+<input type="text" id="email" placeholder="Enter Email" onkeyup="updateProfile()">
+
+<!-- Profile Card -->
+<div class="card">
+    <h3 id="pname">Your Name</h3>
+    <p id="pemail">Your Email</p>
+</div>
+
+<script>
+
+function updateProfile() {
+
+    // Get values from inputs
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+
+    // Update profile card live
+    document.getElementById("pname").innerText = name || "Your Name";
+    document.getElementById("pemail").innerText = email || "Your Email";
+}
+
+</script>
+
+</body>
+</html>

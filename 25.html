@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Chart</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background */
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card Container */
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+/* Title */
+h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Chart box */
+.chart-box {
+    width: 100%;
+    height: 300px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h3>📊 Students in Different Departments</h3>
+
+    <div class="chart-box">
+        <canvas id="mychart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('mychart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["CSE", "IT", "Mechanical", "Civil", "Electronics"],
+        datasets: [{
+            label: "Number of Students",
+            data: [120, 90, 70, 60, 80],
+            backgroundColor: [
+                "#667eea",
+                "#764ba2",
+                "#ff7eb3",
+                "#42e695",
+                "#f093fb"
+            ],
+            borderRadius: 8
+        }]
+    },
+
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        },
+
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

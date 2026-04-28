@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pricing Toggle</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: linear-gradient(to right, #eef2ff, #f4f7ff);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Toggle button */
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            background: #4facfe;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #2d8cff;
+        }
+
+        /* Plan type text */
+        #type {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #222;
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Pricing card */
+        .box {
+            background: white;
+            width: 220px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Plan title */
+        .box h3 {
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        /* Price style */
+        .price {
+            font-size: 26px;
+            color: #28a745;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Small note */
+        .note {
+            font-size: 12px;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Pricing Plans</h2>
+
+<!-- Toggle Button -->
+<button onclick="togglePlan()">Switch Plan</button>
+
+<!-- Plan type -->
+<p id="type">Monthly Plan</p>
+
+<!-- Cards -->
+<div class="container">
+
+    <div class="box">
+        <h3>Basic</h3>
+        <p id="basic" class="price">₹500</p>
+        <p class="note">For beginners</p>
+    </div>
+
+    <div class="box">
+        <h3>Pro</h3>
+        <p id="pro" class="price">₹1000</p>
+        <p class="note">For professionals</p>
+    </div>
+
+</div>
+
+<script>
+
+let isMonthly = true;
+
+function togglePlan() {
+
+    // yearly plan
+    if (isMonthly) {
+        document.getElementById("type").innerText = "Yearly Plan";
+
+        document.getElementById("basic").innerText = "₹5000";
+        document.getElementById("pro").innerText = "₹10000";
+
+        isMonthly = false;
+    }
+
+    // monthly plan
+    else {
+        document.getElementById("type").innerText = "Monthly Plan";
+
+        document.getElementById("basic").innerText = "₹500";
+        document.getElementById("pro").innerText = "₹1000";
+
+        isMonthly = true;
+    }
+}
+
+</script>
+
+</body>
+</html>

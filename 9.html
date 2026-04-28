@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Drag & Drop List</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #5f7cff, #7b4dff);
+  }
+
+  .card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    width: 260px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 15px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 12px;
+    margin: 8px 0;
+    background: #e5e7eb;
+    border-radius: 8px;
+    cursor: grab;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+
+  li:hover {
+    background: #d1d5db;
+  }
+
+  li.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+  }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+  <h2>📋 Drag List</h2>
+
+  <ul id="list">
+    <li draggable="true">Task 1</li>
+    <li draggable="true">Task 2</li>
+    <li draggable="true">Task 3</li>
+    <li draggable="true">Task 4</li>
+    <li draggable="true">Task 5</li>
+  </ul>
+</div>
+
+<script>
+  const list = document.getElementById("list");
+
+  list.addEventListener("dragstart", (e) => {
+    e.target.classList.add("dragging");
+  });
+
+  list.addEventListener("dragend", (e) => {
+    e.target.classList.remove("dragging");
+  });
+
+  list.addEventListener("dragover", (e) => {
+    e.preventDefault();
+
+    const dragging = document.querySelector(".dragging");
+    const items = [...list.querySelectorAll("li:not(.dragging)")];
+
+    const nextItem = items.find(item => {
+      const rect = item.getBoundingClientRect();
+      return e.clientY < rect.top + rect.height / 2;
+    });
+
+    list.insertBefore(dragging, nextItem || null);
+  });
+</script>
+
+</body>
+</html>

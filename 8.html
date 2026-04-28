@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photo Gallery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        /* Card */
+        .box {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            cursor: pointer;
+        }
+
+        /* Image */
+        .box img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover; /* FIXED alignment */
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        /* Hover zoom */
+        .box:hover img {
+            transform: scale(1.2);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 10px;
+            opacity: 0;
+            transition: 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Show overlay */
+        .box:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Hover lift */
+        .box:hover {
+            transform: translateY(-5px);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h2>✨ Photo Gallery</h2>
+
+<div class="gallery">
+
+    <div class="box">
+        <img src="img1.jpg">
+        <div class="overlay">Image 1</div>
+    </div>
+
+    <div class="box">
+        <img src="img2.jpg">
+        <div class="overlay">Image 2</div>
+    </div>
+
+    <div class="box">
+        <img src="img3.jpg">
+        <div class="overlay">Image 3</div>
+    </div>
+
+    <div class="box">
+        <img src="img4.jpg">
+        <div class="overlay">Image 4</div>
+    </div>
+
+    <div class="box">
+        <img src="img5.jpg">
+        <div class="overlay">Image 5</div>
+    </div>
+
+    <div class="box">
+        <img src="img6.jpg">
+        <div class="overlay">Image 6</div>
+    </div>
+
+</div>
+
+</body>
+</html>

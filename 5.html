@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme Switcher</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Light Theme */
+        body.light {
+            background: #f4f7ff;
+            color: #333;
+        }
+
+        /* Dark Theme */
+        body.dark {
+            background: #121212;
+            color: #f1f1f1;
+        }
+
+        /* Center container */
+        .container {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            background: #ccc;
+            border-radius: 30px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            height: 24px;
+            width: 24px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: #667eea;
+        }
+
+        input:checked + .slider::before {
+            transform: translateX(30px);
+        }
+
+        /* Card */
+        .box {
+            width: 280px;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        body.light .box {
+            background: white;
+        }
+
+        body.dark .box {
+            background: #1e1e1e;
+        }
+
+        /* Button */
+        .btn {
+            padding: 10px 15px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🌗 Theme Switcher</h2>
+
+    <!-- Toggle Switch -->
+    <label class="switch">
+        <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+
+    <!-- Sample Card -->
+    <div class="box">
+        <p>This is a sample box</p>
+        <button class="btn">Click Me</button>
+    </div>
+
+</div>
+
+<script>
+
+// Load saved theme
+window.onload = function () {
+    let theme = localStorage.getItem("theme") || "light";
+
+    document.body.className = theme;
+
+    // Sync toggle position
+    document.getElementById("themeToggle").checked = (theme === "dark");
+};
+
+function toggleTheme() {
+    let toggle = document.getElementById("themeToggle");
+
+    if (toggle.checked) {
+        document.body.className = "dark";
+        localStorage.setItem("theme", "dark");
+    } else {
+        document.body.className = "light";
+        localStorage.setItem("theme", "light");
+    }
+}
+
+</script>
+
+</body>
+</html>

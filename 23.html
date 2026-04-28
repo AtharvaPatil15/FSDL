@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f4f6fb;
+}
+
+/* Navbar */
+.nav {
+    background: #2c3e50;
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav a {
+    color: white;
+    margin: 15px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: #1abc9c;
+}
+
+/* spacing for fixed navbar */
+.spacer {
+    height: 70px;
+}
+
+/* Section Card */
+.section {
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+h2 {
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* Skills */
+.skill {
+    margin: 15px 0;
+}
+
+.bar {
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.fill {
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+    color: white;
+    padding: 5px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* Projects */
+.project {
+    margin-bottom: 10px;
+}
+
+/* Button */
+button {
+    padding: 10px 15px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1a252f;
+}
+
+#msg {
+    margin-top: 10px;
+    color: #1abc9c;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #2c3e50;
+    color: white;
+    margin-top: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="nav">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</div>
+
+<div class="spacer"></div>
+
+<!-- About -->
+<div class="section" id="about">
+    <h2>About</h2>
+    <p>I am a Computer Engineering student passionate about web development and building user-friendly applications.</p>
+    <p>I enjoy learning new technologies like React, Node.js, and working on real-world projects.</p>
+</div>
+
+<!-- Skills -->
+<div class="section" id="skills">
+    <h2>Skills</h2>
+
+    <div class="skill">
+        HTML
+        <div class="bar"><div class="fill" style="width:85%">85%</div></div>
+    </div>
+
+    <div class="skill">
+        CSS
+        <div class="bar"><div class="fill" style="width:75%">75%</div></div>
+    </div>
+
+    <div class="skill">
+        JavaScript
+        <div class="bar"><div class="fill" style="width:70%">70%</div></div>
+    </div>
+
+    <div class="skill">
+        React
+        <div class="bar"><div class="fill" style="width:65%">65%</div></div>
+    </div>
+
+</div>
+
+<!-- Projects -->
+<div class="section" id="projects">
+    <h2>Projects</h2>
+
+    <div class="project">📌 Student Feedback System – Web app for collecting feedback</div>
+    <div class="project">📌 Online Booking App – Booking system with UI</div>
+    <div class="projectp">📌 Portfolio Website – Personal responsive portfolio</div>
+
+    <button onclick="showMsg()">View More</button>
+    <p id="msg"></p>
+</div>
+
+<!-- Contact -->
+<div class="section" id="contact">
+    <h2>Contact</h2>
+    <p>Email: manasvi@gmail.com</p>
+    <p>Phone: +91 9876543210</p>
+    <p>Location: India</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>© 2026 My Portfolio</p>
+</div>
+
+<script>
+function showMsg() {
+    document.getElementById("msg").innerText = "More projects coming soon...";
+}
+</script>
+
+</body>
+</html>
